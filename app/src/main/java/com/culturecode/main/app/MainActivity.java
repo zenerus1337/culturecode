@@ -1,5 +1,8 @@
 package com.culturecode.main.app;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -16,6 +19,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -25,6 +29,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.culturecode.main.app.databinding.ActivityMainBinding;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 public class MainActivity extends AppCompatActivity {
     LoginResponse loginResponse;
@@ -50,9 +56,11 @@ public class MainActivity extends AppCompatActivity {
         binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null)
-                        .setAnchorView(R.id.fab).show();
+                IntentIntegrator intentIntegrator = new IntentIntegrator(MainActivity.this);
+                intentIntegrator.setOrientationLocked(true);
+                intentIntegrator.setPrompt("Zeskanuj kod QR");
+                intentIntegrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
+                intentIntegrator.initiateScan();
             }
         });
         DrawerLayout drawer = binding.drawerLayout;
@@ -70,7 +78,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if(intentResult != null) {
+            String contents = intentResult.getContents();
+            if(contents != null) {
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Hasło", contents);
+                clipboard.setPrimaryClip(clip);
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

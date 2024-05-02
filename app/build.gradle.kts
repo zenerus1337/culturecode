@@ -65,5 +65,7 @@ dependencies {
     implementation("io.swagger.core.v3:swagger-core:2.0.5")
 //    implementation("io.springfox:springfox-swagger2:3.0.0")
 //    implementation("io.springfox:springfox-swagger-ui:3.0.0")
+    implementation("com.google.zxing:core:3.4.1")
+    implementation("com.journeyapps:zxing-android-embedded:4.2.0")
 
 }

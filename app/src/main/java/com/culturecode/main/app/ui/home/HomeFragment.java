@@ -51,13 +51,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
         return v;
     }
-
-
-
-
-
-
-
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         gMap = googleMap;
