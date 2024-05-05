@@ -2,7 +2,9 @@ package pl.pwr.isk.culturecode.repository;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import pl.pwr.isk.culturecode.model.User;
+import org.springframework.stereotype.Component;
+import pl.pwr.isk.culturecode.model.UserEntity;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+@Component
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
 }
