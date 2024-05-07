@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: mc-cc-postgres
+    environment:
+      POSTGRES_DB: culturecode
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    volumes:
+      - mc-cc-postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - mc-cc-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: mc-cc-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: cwirko12@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+    depends_on:
+      - mc-cc-postgres
+    volumes:
+      - mc-cc-pgadmin-data:/var/lib/pgadmin
+    networks:
+      - mc-cc-network
+
+  mc-cc-app:
+    image: mc-cc-app  # Replace with your custom image name
+    container_name: mc-cc-app
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/culturecode
+      SPRING_DATASOURCE_USERNAME: cwirko12@gmail.com
+      SPRING_DATASOURCE_PASSWORD: root
+    depends_on:
+      - mc-cc-postgres
+    networks:
+      - mc-cc-network
+
+networks:
+  mc-cc-network:
+    driver: bridge
+
+volumes:
+  mc-cc-postgres-data:
+    driver: local
+  mc-cc-pgadmin-data:
+    driver: local
