@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Dodany TextView dla nazwy miejsca -->
+    <TextView
+        android:id="@+id/tvPlaceName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nazwa Miejsca"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:paddingBottom="16dp" />
+
+    <TextView
+        android:id="@+id/tvFacts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ciekawostki"
+        android:textSize="18sp"
+        android:paddingBottom="16dp"/>
+
+    <Button
+        android:id="@+id/btnCommentsForm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dodaj komentarz"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/btnStartQuiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rozpocznij quiz"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/btnBackToList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Powrót do listy"
+        android:layout_marginTop="16dp" />
+
+</LinearLayout>

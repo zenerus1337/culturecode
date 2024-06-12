@@ -2,27 +2,27 @@ package com.culturecode.main.app.connection;
 
 public class RegisterRequest {
     private String login;
-    private String email;
     private String password;
+    private String email;
 
+    // Constructor
+    public RegisterRequest(String login, String password, String email) {
+        this.login = login;
+        this.password = password;
+        this.email = email;
+    }
+
+    // Getters and Setters
     public String getLogin() {
         return login;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public void setLogin(String login) {
         this.login = login;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {

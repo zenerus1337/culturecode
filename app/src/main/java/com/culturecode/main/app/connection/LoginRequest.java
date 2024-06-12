@@ -1,19 +1,26 @@
 package com.culturecode.main.app.connection;
 
 public class LoginRequest {
-    private String  login;
+    private String login;
     private String password;
 
-    public String getLogin(String login) {
-        return login;
+    // Constructor
+    public LoginRequest(String login, String password) {
+        this.login = login;
+        this.password = password;
     }
 
-    public String getPassword(String password) {
-        return password;
+    // Getters and Setters
+    public String getLogin() {
+        return login;
     }
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {

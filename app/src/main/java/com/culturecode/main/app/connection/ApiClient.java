@@ -1,31 +1,27 @@
 package com.culturecode.main.app.connection;
 
-import okhttp3.OkHttp;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-
-    public static Retrofit getRetrofit() {
-        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
-        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor).build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("http://10.0.2.2:8080/")
-                .client(okHttpClient)
-                .build();
-
-        return retrofit;
-    }
+    private static final String BASE_URL = "http://localhost:8080/";
+    private static UserService apiService;
 
     public static UserService getService() {
-        UserService userService = getRetrofit().create(UserService.class);
+        if (apiService == null) {
+            Gson gson = new GsonBuilder()
+                    .setLenient()
+                    .create();
 
-        return userService;
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .build();
+
+            apiService = retrofit.create(UserService.class);
+        }
+        return apiService;
     }
 }

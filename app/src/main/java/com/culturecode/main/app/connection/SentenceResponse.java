@@ -1,10 +1,10 @@
 package com.culturecode.main.app.connection;
 
-public class RegisterResponse {
+public class SentenceResponse {
     private String message;
 
     // Constructor
-    public RegisterResponse(String message) {
+    public SentenceResponse(String message) {
         this.message = message;
     }
 

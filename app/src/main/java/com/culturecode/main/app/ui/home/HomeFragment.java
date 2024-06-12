@@ -38,15 +38,15 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 import kotlin.Triple;
 
 public class HomeFragment extends Fragment implements OnMapReadyCallback {
-
-    private FragmentHomeBinding binding;
     private GoogleMap gMap;
+    public localisations local = new localisations();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        local.initializeLocalizations();
         View v = inflater.inflate(R.layout.fragment_home, container, false);
-
         SupportMapFragment mapFragment = (SupportMapFragment)getChildFragmentManager().findFragmentById(R.id.map_id);
+
         mapFragment.getMapAsync(this);
 
         return v;
@@ -54,9 +54,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         gMap = googleMap;
-        localisations local = new localisations();
 
-        local.initializeLocalizations();
         for(Triple<String, Double, Double> place : local.listedPlaces) {
             LatLng location = new LatLng(place.getSecond(),place.getThird());
             gMap.addMarker(new MarkerOptions().position(location).title(place.getFirst()));
