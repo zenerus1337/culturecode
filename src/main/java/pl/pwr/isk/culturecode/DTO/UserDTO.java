@@ -1,23 +1,11 @@
-package pl.pwr.isk.culturecode.model;
+package pl.pwr.isk.culturecode.DTO;
 
-import jakarta.persistence.*;
-
-import java.util.Objects;
-
-@Entity
-@Table(name = "users")
-public class UserEntity {
-
-    @Id
-    @Column(unique = true, nullable = false)
+public class UserDTO {
     private String login;
-
-    @Column(unique = true, nullable = false)
     private String email;
-
-    @Column(nullable = false)
     private String password;
 
+    // Getters and Setters
     public String getLogin() {
         return login;
     }
